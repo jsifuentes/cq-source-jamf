@@ -1,0 +1,24 @@
+kind: source
+spec:
+  name: "jamf"
+  registry: "grpc"
+  path: "localhost:7777"
+  version: "v1.0.0"
+  tables:
+    ["*"]
+  destinations:
+    - "sqlite"
+  spec:
+    client_id: ${JAMF_CLIENT_ID}
+    client_secret: ${JAMF_CLIENT_SECRET}
+    auth_method: oauth
+    instance_domain: ${JAMF_INSTANCE_DOMAIN}
+---
+kind: destination
+spec:
+  name: sqlite
+  path: cloudquery/sqlite
+  registry: cloudquery
+  version: "v2.9.4"
+  spec:
+    connection_string: ./db.sql
