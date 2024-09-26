@@ -74,12 +74,12 @@ func fetchComputers(ctx context.Context, meta schema.ClientMeta, _ *schema.Resou
 
 	var totalCount int
 	var results []jamf.ComputerInventory
-	page := 1
+	page := 0
 	for done := false; !done; done = (len(results) >= totalCount) {
 		computers, err := c.JamfClient.GetComputerInventories(&jamf.ComputerInventoriesQuery{
 			Sections: &allSections,
 			Page:     page,
-			PageSize: 20,
+			PageSize: 100,
 			Sort:     &[]string{"general.name:asc"},
 		})
 		if err != nil {
